@@ -21,11 +21,13 @@ class Program{
             //CreateStudent(connection);
             //CreateManyCategories(connection);
             //UpdateCategory(connection);
-            DeleteCategory(connection);
+            //DeleteCategory(connection);
             //ExecuteProcedure(connection);
             //ExecuteReadProcedure(connection);
             //ExecuteScalar(connection);
             //ReadView(connection);
+            //OneToOne(connection);
+            QueryMultiple(connection);
             
         }
     }
@@ -213,6 +215,37 @@ class Program{
         foreach(var item in courses){
             Console.WriteLine($"{item.Id} - {item.Title}");
         }
+    }
+
+    public static void OneToOne(SqlConnection connection){
+        var sql = "SELECT * FROM [CareerItem] JOIN [Course] ON [CareerItem].[CourseId] = [Course].[Id]";
+
+        var items = connection.Query(sql);
+
+        foreach(var item in items){
+            
+            Console.WriteLine(item);
+        }
+    }
+
+    public static void QueryMultiple(SqlConnection connection){
+
+        var sql = "SELECT * FROM [Course]; SELECT * FROM [Category]";
+    
+        using (var multi = connection.QueryMultiple(sql)){
+
+            var courses = multi.Read<Course>();
+            var categories = multi.Read<Category>();
+
+            foreach (var item in courses){
+                Console.WriteLine(item.Title);
+            }
+
+            foreach (var item in categories){
+                Console.WriteLine(item.Title);
+            }
+        }
+    
     }
 }
 }
