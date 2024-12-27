@@ -54,3 +54,4 @@ C:\Users\carlo\OneDrive\Área de Trabalho\GG\C#\Balta\Data_Access\obj\Debug\net8
 C:\Users\carlo\OneDrive\Área de Trabalho\GG\C#\Balta\Data_Access\obj\Debug\net8.0\Data_Access.pdb
 C:\Users\carlo\OneDrive\Área de Trabalho\GG\C#\Balta\Data_Access\obj\Debug\net8.0\Data_Access.genruntimeconfig.cache
 C:\Users\carlo\OneDrive\Área de Trabalho\GG\C#\Balta\Data_Access\obj\Debug\net8.0\ref\Data_Access.dll
+C:\Users\carlo\OneDrive\Área de Trabalho\GG\C#\Balta\Data_Access\obj\Debug\net8.0\Data_Access.sourcelink.json
