@@ -27,7 +27,10 @@ class Program{
             //ExecuteScalar(connection);
             //ReadView(connection);
             //OneToOne(connection);
-            QueryMultiple(connection);
+            //QueryMultiple(connection);
+            //SelectIn(connection);
+            //Like(connection);
+            Transactions(connection);
             
         }
     }
@@ -231,21 +234,82 @@ class Program{
     public static void QueryMultiple(SqlConnection connection){
 
         var sql = "SELECT * FROM [Course]; SELECT * FROM [Category]";
-    
-        using (var multi = connection.QueryMultiple(sql)){
+
+            //forma otimizada de using
+            using var multi = connection.QueryMultiple(sql);
 
             var courses = multi.Read<Course>();
             var categories = multi.Read<Category>();
 
-            foreach (var item in courses){
+            foreach (var item in courses)
+            {
                 Console.WriteLine(item.Title);
             }
 
-            foreach (var item in categories){
+            foreach (var item in categories)
+            {
                 Console.WriteLine(item.Title);
             }
+    }
+
+    public static void SelectIn (SqlConnection connection){
+        var sql = "SELECT * FROM [Career] WHERE [Id] IN @Id";
+
+        var items = connection.Query<Career>(sql, new{
+            Id = new[]{
+                "01ae8a85-b4e8-4194-a0f1-1c6190af54cb",
+                "e6730d1c-6870-4df3-ae68-438624e04c72"
+            }
+        });
+
+        foreach (var i in items){
+            Console.WriteLine(i.Title);
         }
+    }    
+
+    public static void Like (SqlConnection connection){
+        var sql = "SELECT * FROM [Course] WHERE [Title] LIKE @exp";
+
+        var items = connection.Query<Course>(sql, new{
+            exp = "%backend%"
+                    
+        });
+
+        foreach (var i in items){
+            Console.WriteLine(i.Title);
+        }
+    }
+
+    public static void Transactions(SqlConnection connection){
+        var student = new Student();
+        student.Id = Guid.NewGuid();
+        student.Name = "NaoEParaSalvar";
+        student.Email = "NaoEParaSalvar";
+        student.Document = "NaoEParaSalvar";
+        student.Phone =  6184836659;
+        student.Birthdate = new DateTime(1993,1,18);
+        student.Createdate = DateTime.Now;
+        
+        var sql = "INSERT INTO [Student] VALUES (@Id, @Name, @Email, @Document, @Phone, @Birthdate, @Createdate)";
     
+            connection.Open();
+            using (var transaction = connection.BeginTransaction()){
+
+                var rows = connection.Execute(sql, new{
+                student.Id,
+                student.Name,
+                student.Email,
+                student.Document,
+                student.Phone,
+                student.Birthdate,
+                student.Createdate,
+            },transaction);
+
+            transaction.Commit();
+            //transaction.Rollback();
+
+            Console.WriteLine($"{rows} rows inserted");
+        }        
     }
 }
 }
