@@ -4,7 +4,6 @@ namespace Data_Access.Models{
 public class Course{
 
     public Guid Id {get; set;}
-    public int Tag {get; set;}
     public string Title {get; set;}
     public string Summary {get; set;}
     public string Url {get; set;}
