@@ -16,7 +16,7 @@ Explorar e testar os principais recursos do Dapper:
 
 - [.NET 8](https://dotnet.microsoft.com/)
 - [Dapper](https://github.com/DapperLib/Dapper)
-- SQL Server (local ou Docker)
+- SQL Server (Docker)
 - C#
 
 ## 📂 Estrutura do Projeto
