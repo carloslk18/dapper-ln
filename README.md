@@ -44,4 +44,4 @@ Como o Dapper se comporta em cenários simples
 
 Este projeto é experimental e educativo. Serve como base para aprender ou relembrar como o Dapper funciona em situações reais.
 
-Feito com café e curiosidade por Carlos Barbosa
+Feito com café e curiosidade por [Carlos Barbosa](https://github.com/carloslk18)
