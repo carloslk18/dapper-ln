@@ -1,4 +1,4 @@
-## Dapper Test - `dapper-ln`
+## Dapper Test
 
 Este repositório é um pequeno projeto de testes com **Dapper**, uma micro-ORM para .NET, focado em consultas SQL performáticas com C#. Ideal para entender como o Dapper funciona na prática em operações CRUD.
 
